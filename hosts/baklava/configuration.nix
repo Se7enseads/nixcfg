@@ -52,9 +52,13 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+
+    fish.enable = true;
   };
 
   # List services that you want to enable:
