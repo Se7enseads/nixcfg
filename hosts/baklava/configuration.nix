@@ -33,13 +33,6 @@
     variant = "altgr-intl";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.coba = {
-    isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
