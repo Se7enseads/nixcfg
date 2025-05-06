@@ -23,44 +23,38 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = {
-    self,
-    home-manager,
-    nixpkgs,
-    systems,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
+  outputs = { self, home-manager, nixpkgs, systems, ... }@inputs:
+    let
+      inherit (self) outputs;
 
-    lib = nixpkgs.lib // home-manager.lib;
-    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs (import systems) (
-      system:
+      lib = nixpkgs.lib // home-manager.lib;
+      forEachSystem = f:
+        lib.genAttrs (import systems) (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs (import systems) (system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-        }
-    );
-  in {
-    inherit lib;
+        });
+    in {
+      inherit lib;
 
-    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
 
-    overlays = import ./overlays {inherit inputs;};
+      overlays = import ./overlays { inherit inputs; };
 
-    nixosConfigurations = {
-      baklava = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/baklava];
+      nixosConfigurations = {
+        baklava = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/baklava ];
+        };
+      };
+
+      homeConfigurations = {
+        "coba@baklava" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/coba/baklava.nix ];
+        };
       };
     };
-
-    homeConfigurations = {
-      "coba@baklava" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/coba/baklava.nix];
-      };
-    };
-  };
 }
