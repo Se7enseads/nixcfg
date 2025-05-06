@@ -23,21 +23,29 @@
     self,
     home-manager,
     nixpkgs,
+    systems,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+
+    lib = nixpkgs.lib // home-manager.lib;
+    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs (import systems) (
+      system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        }
+    );
   in {
-    packages =
-      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    inherit lib;
+
+    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
+    formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
+
     overlays = import ./overlays {inherit inputs;};
+
     nixosConfigurations = {
       baklava = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -47,14 +55,10 @@
 
     homeConfigurations = {
       "coba@baklava" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/coba/baklava.nix];
       };
-    };
-
-    devShells."x86_64-linux".default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-      packages = with nixpkgs.legacyPackages.x86_64-linux; [nixd alejandra statix vulnix];
     };
   };
 }
