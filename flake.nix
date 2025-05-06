@@ -40,9 +40,7 @@
   in {
     inherit lib;
 
-    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
     packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
-    formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
 
     overlays = import ./overlays {inherit inputs;};
 
