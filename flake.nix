@@ -1,13 +1,17 @@
 {
   description = ''
-    For questions just DM me on X: https://twitter.com/@m3tam3re
-    There is also some NIXOS content on my YT channel: https://www.youtube.com/@m3tam3re
 
-    One of the best ways to learn NIXOS is to read other peoples configurations. I have personally learned a lot from Gabriel Fontes configs:
-    https://github.com/Misterio77/nix-starter-configs
-    https://github.com/Misterio77/nix-config
+    NixOS configuration for Baklava, a NixOS-based system.
 
-    Please also check out the starter configs mentioned above.
+      Config curtesy of:
+
+      M3tam3re
+        X: https://x.com/@m3tam3re
+        YT channel: https://www.youtube.com/@m3tam3re
+
+      Misterio77
+        https://github.com/Misterio77/nix-starter-configs
+        https://github.com/Misterio77/nix-config
   '';
 
   inputs = {
