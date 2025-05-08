@@ -4,7 +4,7 @@
 { config, lib, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = lib.mkDefault "coba";
+  home.username = lib.mkDefault "castella";
   home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
   # This value determines the Home Manager release that your configuration is

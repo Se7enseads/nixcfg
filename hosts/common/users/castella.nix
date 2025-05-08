@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: {
-  users.users.coba = {
+  users.users.castella = {
     initialHashedPassword =
-      "$y$j9T$SkwlNgW/ZaocYlRjQfcnB0$Y1p2hLd1SmaF6/ymFiJAf4ctK6NPZhAGIAY3UB1ROtD";
+      "$y$j9T$FZLWWZeipU4JqIMKPOOKH0$L.KOlFm.lEKhH0xAkc1iuXbzOaTIP2sR6PnRG5eu3q6";
     isNormalUser = true;
     extraGroups = [
       "wheel"
@@ -19,6 +19,6 @@
     packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
   };
 
-  home-manager.users.coba =
-    import ../../../home/coba/${config.networking.hostName}.nix;
+  home-manager.users.castella =
+    import ../../../home/castella/${config.networking.hostName}.nix;
 }

@@ -18,8 +18,10 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users =
-        [ "root" "coba" ]; # Set users that are allowed to use the flake command
+      trusted-users = [
+        "root"
+        "castella"
+      ]; # Set users that are allowed to use the flake command
     };
     gc = {
       automatic = true;

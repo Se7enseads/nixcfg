@@ -1,7 +1,7 @@
 {
   description = ''
 
-    NixOS configuration for Baklava, a NixOS-based system.
+    NixOS configuration for Okashi, a NixOS-based system.
 
       Config curtesy of:
 
@@ -43,17 +43,17 @@
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {
-        baklava = nixpkgs.lib.nixosSystem {
+        okashi = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/baklava ];
+          modules = [ ./hosts/okashi ];
         };
       };
 
       homeConfigurations = {
-        "coba@baklava" = home-manager.lib.homeManagerConfiguration {
+        "castella@okashi" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgsFor.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/coba/baklava.nix ];
+          modules = [ ./home/castella/okashi.nix ];
         };
       };
     };

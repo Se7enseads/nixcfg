@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs, ... }: {
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -11,7 +12,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "baklava"; # Define your hostname.
+  networking.hostName = "okashi"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -52,6 +53,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
   programs = {
     hyprland = {
       enable = true;
