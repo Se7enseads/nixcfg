@@ -1,7 +1,6 @@
 { lib, outputs, pkgs, ... }: {
   nixpkgs = {
     # You can add overlays here
-    overlays = builtins.attrValues outputs.overlays;
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -9,12 +8,13 @@
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
+    overlays = builtins.attrValues outputs.overlays;
   };
 
   nix = {
     package = lib.mkDefault pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [ "flakes" "nix-command" ];
       warn-dirty = false;
     };
   };

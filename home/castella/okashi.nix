@@ -1,1 +1,1 @@
-{ imports = [ ./home.nix ../common ]; }
+{ imports = [ ../common ./home.nix ]; }

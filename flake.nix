@@ -38,9 +38,9 @@
     in {
       inherit lib;
 
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
-
       overlays = import ./overlays { inherit inputs; };
+
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
 
       nixosConfigurations = {
         okashi = nixpkgs.lib.nixosSystem {
