@@ -33,6 +33,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
+      withUWSM = true;
     };
 
     fish.enable = true;
