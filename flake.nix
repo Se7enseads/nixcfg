@@ -38,6 +38,8 @@
     in {
       inherit lib;
 
+      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
+
       overlays = import ./overlays { inherit inputs; };
 
       packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
