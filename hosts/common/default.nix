@@ -3,7 +3,10 @@
 
   imports = [ inputs.home-manager.nixosModules.home-manager ./users ];
 
-  home-manager.extraSpecialArgs = { inherit inputs outputs; };
+  home-manager = {
+    backupFileExtension = "bak.hm";
+    extraSpecialArgs = { inherit inputs outputs; };
+  };
 
   nixpkgs = {
     # Configure your nixpkgs instance
