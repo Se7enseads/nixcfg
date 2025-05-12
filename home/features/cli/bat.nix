@@ -14,6 +14,7 @@ in {
         batwatch
         prettybat
       ];
+      config = { style = [ "numbers" "changes" "header" ]; };
     };
   };
 
