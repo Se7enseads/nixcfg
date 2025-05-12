@@ -53,11 +53,12 @@ in {
           rm = "rm -i";
           mkdir = "mkdir -pv";
 
-          #System commands
+          #System commands # FIXME: find a way to make this work
           # system = "clear && nh os switch";
           # home = "clear && nh home switch -b hm.bak";
           # sync = "system && home";
-          upgrade = "update && sync";
+          # upgrade = "update && sync";
+
           check = "nix flake check ${config.home.homeDirectory}/nixcfg";
 
           clean = "nh clean all --keep 5";
