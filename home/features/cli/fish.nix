@@ -2,9 +2,9 @@
 with lib;
 let
   cfg = config.features.cli;
-  direnvEnabled = cfg.direnv.enable or false;
-  fastfetchEnabled = cfg.fastfetch.enable or false;
-  starshipEnabled = cfg.starship.enable or false;
+  direnvEnabled = cfg.direnv.enable;
+  fastfetchEnabled = cfg.fastfetch.enable;
+  starshipEnabled = cfg.starship.enable;
 in {
 
   config = mkIf cfg.fish.enable {
