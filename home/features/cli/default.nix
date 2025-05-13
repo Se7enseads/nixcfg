@@ -11,5 +11,5 @@
     ./zoxide.nix
   ];
 
-  home.packages = with pkgs; [ btop coreutils dua fd jq ripgrep tealdeer foot ];
+  home.packages = with pkgs; [ btop coreutils dua fd jq ripgrep tealdeer ];
 }

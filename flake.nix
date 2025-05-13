@@ -15,11 +15,22 @@
   '';
 
   inputs = {
+    # assets.url = "github:Se7enseads/assets"; # TODO: add assets flake
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
