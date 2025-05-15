@@ -30,6 +30,7 @@ in {
 
           mc = "mkdir $argv[1] && cd $argv[1]";
           trash = "mv $argv[1] ~/.local/share/Trash/";
+          vs = "code $argv[1]; exit";
         };
 
         shellAliases = {
