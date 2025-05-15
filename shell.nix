@@ -7,6 +7,8 @@
       git
 
       nixd
+      nvd
+      nix-output-monitor
       nixfmt-classic
       statix
       vulnix
