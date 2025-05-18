@@ -33,5 +33,9 @@
 #:w
 # networking.hostName = "nixos"; # Define your hostname.
 {
-  imports = [ ../common ./configuration.nix ];
+  imports = [
+    ../common
+    ./configuration.nix
+    ../common/optional/greetd/regreet.nix # TODO: add login manager options
+  ];
 }
