@@ -6,8 +6,9 @@ with lib;
 let
   # aplay = getExe' pkgs.alsa-utils "aplay";
   cfg = config.hyprmodules.hyprpanel;
-  # l_sound = "~/Music/sounds/logout.wav"; # TODO: get assets
-  # s_sound = "~/Music/sounds/shutdown.wav";
+  # sounds = "~/Music/sounds";
+  # l_sound = "${sounds}/logout.wav"; # TODO: get assets
+  # s_sound = "${sounds}/shutdown.wav";
 in {
   imports = [ inputs.hyprpanel.homeManagerModules.hyprpanel ];
 
@@ -73,11 +74,11 @@ in {
 
           power = {
             lowBatteryNotification = true;
-            # reboot = "${aplay} -c 2 ${s_sound} && systemctl reboot";
+            # reboot = "${aplay} -c 2 ${s_sound}; sleep 2; systemctl reboot";
             reboot = "systemctl reboot";
-            # shutdown = "${aplay} -c 2 ${s_sound} && systemctl poweroff";
+            # shutdown = "${aplay} -c 2 ${s_sound}; sleep 2; systemctl poweroff";
             shutdown = "systemctl poweroff";
-            # logout = "${aplay} -c 2 ${l_sound} && uwsm stop";
+            # logout = "${aplay} -c 2 ${l_sound}; sleep 2; uwsm stop";
             logout = "uwsm stop";
           };
         };
