@@ -1,14 +1,15 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./rofi.nix ./bars/waybar.nix ./bars/ignis.nix ];
+  imports = [ ./rofi.nix ./bars/waybar.nix ./bars/ignis.nix ./waypaper.nix ];
 
   waymodules = {
-    rofi.enable = true;
     bars = {
       waybar.enable = false;
       ignis.enable = false;
     };
+    rofi.enable = true;
+    waypaper.enable = true;
   };
 
   home.packages = with pkgs; [

@@ -1,1 +1,1 @@
-_: { imports = [ ./fonts.nix ]; }
+_: { imports = [ ./fonts.nix ./wallpapers.nix ]; }

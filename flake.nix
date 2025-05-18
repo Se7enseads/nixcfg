@@ -15,7 +15,11 @@
   '';
 
   inputs = {
-    # assets.url = "github:Se7enseads/assets"; # TODO: add assets flake
+    assets = {
+      url = "github:Se7enseads/assets";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
