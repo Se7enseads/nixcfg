@@ -2,7 +2,7 @@
 
 with lib;
 let
-  hyprland = config.features.desktop.hyprland;
+  inherit (config.features.desktop) hyprland;
   wayland = config.waymodules;
 in {
 

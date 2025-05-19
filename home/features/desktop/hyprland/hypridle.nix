@@ -3,8 +3,8 @@
 with lib;
 let
   cfg = config.hyprmodules;
-  hyprlock = cfg.hyprlock;
-  hypridle = cfg.hypridle;
+  inherit (cfg) hyprlock;
+  inherit (cfg) hypridle;
 in {
   config = mkIf hypridle.enable {
     services.hypridle = {
