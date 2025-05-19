@@ -22,7 +22,7 @@
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountPoint = "/boot";
+                mountpoint = "/boot";
               };
             };
             root = {
@@ -30,7 +30,7 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountPoint = "/";
+                mountpoint = "/";
               };
             };
           };
