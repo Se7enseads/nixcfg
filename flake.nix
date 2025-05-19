@@ -67,7 +67,7 @@
       nixosConfigurations = {
         okashi = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/okashi ];
+          modules = [ ./hosts/okashi inputs.disko.nixosModules.disko ];
         };
       };
 
