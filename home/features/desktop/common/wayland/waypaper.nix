@@ -10,7 +10,7 @@ let
 in {
   config = mkIf wayland.waypaper.enable {
 
-    home.packages = with pkgs; [ waypaper swww pywal16 pywalfox-native ];
+    home.packages = with pkgs; [ waypaper swww ];
 
     xdg.configFile."waypaper/config.ini".text = ''
       [Settings]
