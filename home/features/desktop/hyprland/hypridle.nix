@@ -1,44 +1,39 @@
 { config, lib, ... }:
 
 with lib;
-let
-  cfg = config.hyprmodules;
-  inherit (cfg) hyprlock;
-  inherit (cfg) hypridle;
+let cfg = config.hyprmodules;
 in {
-  config = mkIf hypridle.enable {
+  config = mkIf cfg.hypridle.enable {
     services.hypridle = {
       enable = true;
       settings = {
         general = {
-          lock_cmd = optionalString hyprlock.enable
-            "pidof hyprlock || hyprlock"; # lock screen
-          before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
-          after_sleep_cmd =
-            "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
+          lock_cmd =
+            if cfg.hyprlock.enable then "pidof hyprlock || hyprlock" else "";
+          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = "hyprctl dispatch dpms on";
         };
 
         listeners = [
           {
-            timeout = 150;
-            on-timeout = "brightnessctl -s set 10";
+            timeout = 150; # 2.5min.
+            on-timeout = "brightnessctl -s set 2%";
             on-resume = "brightnessctl -r";
           }
           {
             timeout = 150; # 2.5min.
-            on-timeout = "brightnessctl -sd platform::kbd_backlight set 0";
+            on-timeout =
+              "brightnessctl -q --device=platform::kbd_backlight get | awk '{if ($1 >= 1) system(\"brightnessctl -sd platform::kbd_backlight set 0\")}'";
             on-resume = "brightnessctl -rd platform::kbd_backlight";
           }
           {
-            timeout = 300; # 5min
-            on-timeout = optionalString hyprlock.enable "hyprlock";
+            timeout = 900; # 5min
+            on-timeout = "loginctl lock-session";
           }
           {
-            timeout = 330; # 5.5min
-            on-timeout =
-              "hyprctl dispatch dpms off"; # screen off when timeout has passed
-            on-resume =
-              "hyprctl dispatch dpms on"; # screen on when activity is detected after timeout has fired.
+            timeout = 1200; # 5.5min
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on; brightnessctl -r";
           }
           {
             timeout = 1800; # 30min

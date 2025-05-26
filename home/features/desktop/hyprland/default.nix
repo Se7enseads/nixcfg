@@ -18,7 +18,7 @@ in {
 
     hyprmodules = {
       hyprlock.enable = false;
-      hypridle.enable = false;
+      hypridle.enable = true;
       hyprpanel.enable = true;
     };
 
