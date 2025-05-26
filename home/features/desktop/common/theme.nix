@@ -31,7 +31,7 @@
     gtk3 = {
       bookmarks = map (entry:
         let
-          path = entry.path;
+          inherit (entry) path;
           name = entry.name or "";
           label = if name != "" then " ${name}" else "";
         in "file://${config.home.homeDirectory}/${path}${label}") [
@@ -58,6 +58,6 @@
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
   };
 }
