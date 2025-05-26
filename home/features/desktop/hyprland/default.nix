@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 let
@@ -24,9 +24,8 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+      package = pkgs.hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
       xwayland.enable = true;
 
       sourceFirst = true;
@@ -36,12 +35,7 @@ in {
 
         exec-once = [
           (getExe pkgs.fusuma) # TODO: add fusuma option
-          "polkit-agent-helper-1" # TODO: add polkit
-          "poweralertd" # TODO: look for a better alternative
-          "swww-daemon" # TODO: add swww
-          "systemctl start --user polkit-gnome-authentication-agent-1"
           (optionalString wayland.bars.ignis.enable "ignis init")
-          "waypaper --restore" # TODO: add waypaper
           "wl-paste --type text --watch cliphist store"
           "wl-paste --type image --watch cliphist store"
         ];
@@ -55,6 +49,7 @@ in {
         ];
 
         general = {
+          monitor = ", 3840x2160@60.00000, auto, 2.4";
           gaps_in = 5;
           gaps_out = 5;
           border_size = 3;
