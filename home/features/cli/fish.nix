@@ -65,7 +65,7 @@ in {
           clean = "nh clean all --keep 5";
 
           dn = "nvim ${config.home.homeDirectory}/nixcfg";
-          dc = "code ${config.home.homeDirectory}/nixcfg | exit";
+          dc = "code ${config.home.homeDirectory}/nixcfg; exit";
 
           regit = "sudo chown -R ${config.home.username}:users .git/* ";
         };
