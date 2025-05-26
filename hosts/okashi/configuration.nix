@@ -14,6 +14,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  # TODO: Move to common configuration
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
@@ -30,12 +31,14 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   programs = {
+    # TODO: Make this dynamic based on user wm
     hyprland = {
       enable = true;
       xwayland.enable = true;
       withUWSM = true;
     };
 
+    # TODO: Make this dynamic based on user shell
     fish.enable = true;
   };
 
@@ -51,6 +54,7 @@
   };
 
   # Configure keymap in X11
+  # FIXME: chnage to a more suitable keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "altgr-intl";

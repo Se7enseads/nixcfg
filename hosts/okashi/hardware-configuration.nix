@@ -4,6 +4,7 @@
 { lib, modulesPath, ... }:
 
 {
+  # TODO: add hardware specific options
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ./disko.nix ];
 
   boot = {
