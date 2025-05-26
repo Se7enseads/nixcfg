@@ -18,13 +18,13 @@ in {
           title = "Foot Terminal";
           app-id = "foot-terminal";
           dpi-aware = true;
-          font = "JetBrainsMono Nerd Font:size=12:antialias=true";
-          pad = "8x8";
-          letter-spacing = 1;
-          bold-text-in-bright = true;
+          font = "JetBrainsMono Nerd Font:size=10:antialias=true";
+          pad = "5x5";
+          letter-spacing = 0;
+          bold-text-in-bright = false;
         };
 
-        scrollback = { lines = 1000; };
+        scrollback = { lines = 10000; };
 
         url = { launch = "${getExe' pkgs.xdg-utils "xdg-open"} \${url}"; };
 
