@@ -19,24 +19,6 @@ in {
       overwrite.enable = true;
       overlay.enable = true;
       settings = {
-        layout = {
-          "bar.layouts" = {
-            "*" = {
-              "left" = [ "dashboard" "workspaces" "media" ];
-              "middle" = [ "clock" ];
-              "right" = [
-                "volume"
-                "battery"
-                "network"
-                "bluetooth"
-                "systray"
-                "notifications"
-                "power"
-              ];
-            };
-          };
-        };
-
         bar = {
           bluetooth = { rightClick = "blueman-manager"; };
 
@@ -58,7 +40,12 @@ in {
             showWifiInfo = true;
           };
 
-          systray.ignore = [ "nm-applet" "blueman" ];
+          notifications = {
+            hideCountWhenZero = true;
+            show_total = true;
+          };
+
+          systray.ignore = [ "nm-applet" ];
 
           volume = {
             rightClick = "pamixer -t";
@@ -66,7 +53,27 @@ in {
             scrollDown = "pamixer -d 5";
           };
 
-          workspaces = { workspaceIconMap = { "1" = ""; }; };
+          workspaces = {
+            ignored = "-98";
+            show_numbered = true;
+          };
+        };
+
+        layout = {
+          "bar.layouts" = {
+            "*" = {
+              "left" = [ "dashboard" "workspaces" "media" ];
+              "middle" = [ "clock" ];
+              "right" = [
+                "volume"
+                "battery"
+                "network"
+                "systray"
+                "notifications"
+                "power"
+              ];
+            };
+          };
         };
 
         menus = {
@@ -83,12 +90,21 @@ in {
           };
         };
 
+        scalingPriority = "hyprland";
+
         theme = {
           bar = {
             transparent = true;
             floating = true;
             outer_spacing = "0em";
             margin_top = "0em";
+
+            buttons = {
+              clock = { enableBorder = true; };
+              dashboard = { enableBorder = true; };
+              modules = { power = { enableBorder = true; }; };
+              systray = { enableBorder = true; };
+            };
 
             menus = {
               menu = {
@@ -114,7 +130,7 @@ in {
 
           osd = {
             location = "bottom";
-            margins = "0px 0px 0px 0px";
+            margins = "0px 0px 60px 0px";
             muted_zero = true;
             orientation = "horizontal";
           };
@@ -123,7 +139,6 @@ in {
 
         };
 
-        scalingPriority = "hyprland";
       };
     };
   };
