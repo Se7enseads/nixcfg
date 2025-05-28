@@ -40,17 +40,29 @@
             name = "Config";
           }
           {
-            path = "dotfiles";
-            name = "Settings";
+            name = "Dotfiles";
+            path = ".dotfiles";
           }
-          { path = "Documents"; }
-          { path = "Downloads"; }
+          {
+            name = "Docs";
+            path = "docs";
+          }
+          {
+            name = "Downloads";
+            path = "dl";
+          }
           { path = "Nextcloud"; }
           { path = "Node"; }
-          { path = "Pictures"; }
+          {
+            name = "Pictures";
+            path = "media";
+          }
           { path = "Python"; }
           { path = "Rust"; }
-          { path = "Videos"; }
+          {
+            name = "Videos";
+            path = "media/videos";
+          }
         ];
     };
 
