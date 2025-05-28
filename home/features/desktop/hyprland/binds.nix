@@ -43,24 +43,15 @@ in {
         "SUPER, A, exec, ${prefix} rofi -show drun" # TODO: modularize for rofi
         "SUPER, E, exec, ${prefix} ${defaultApp "inode/directory"}"
         "SUPER, F, exec, ${prefix} ${defaultApp "x-schema-handler/https"}"
-
         "SUPER, I, exec, if hyprctl clients | grep title: config; then notify-send 'Already Open'; else ${prefix} code $DOTFILES; fi" # FIXME: set $DOTFILES
-
         "SUPER, J, togglesplit"
-
-        "SUPER, M, exit"
-
+        "SUPER, M, exec, uwsm stop"
         "SUPER, P, pseudo"
         "SUPER, Q, killactive"
-        "SUPER, T, exec, ${prefix} ${
-          defaultApp "x-schema-handler/terminal"
-        }" # FIXME: fix terminal
-
         "SUPER, S, exec, if hyprctl clients | grep spotify; then echo; else ${prefix} spotify; fi" # TODO: make spotify options
         "SUPER, S, togglespecialworkspace, spotify"
-
+        "SUPER, T, exec, ${prefix} $TERM" # FIXME: fix terminal
         "SUPER, V, exec, cliphist list | rofi -dmenu -p 'Clipboard' | cliphist decode | wl-copy" # TODO: modularize for rofi
-
         "SUPER, W, togglefloating" # FIXME: fix floating windows
 
         # Modifiers: SUPER + ALT + KEY
@@ -69,6 +60,8 @@ in {
         # Modifiers: SUPER + CTRL + KEY
         "SUPER CTRL, S, exec, ${prefix} hyprshot -m output" # Screenshot Screen
 
+        # Modifiers: SUPER + SHIFT + KEY
+        "SUPERSHIFT, W, exec, ${prefix} waypaper"
         "SUPERSHIFT, F, fullscreen"
 
         # Modifiers: CTRL + ALT + KEY
@@ -81,6 +74,7 @@ in {
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
+
         ", XF86Calculator, exec, ${prefix} qalculate-gtk" # TODO: get qalculate working
       ] ++ workspaces ++ bars ++ locks;
 
