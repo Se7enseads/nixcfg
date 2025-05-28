@@ -33,7 +33,8 @@
 #:w
 # networking.hostName = "nixos"; # Define your hostname.
 {
-  imports = [ ../common ./configuration.nix ../common/login-manager ];
+  imports =
+    [ ../common ./configuration.nix ../common/login-manager ./secrets.nix ];
 
   login-manager = {
     manager = "greetd"; # enum { greetd, sddm }

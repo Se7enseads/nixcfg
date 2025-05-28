@@ -15,6 +15,13 @@
   '';
 
   inputs = {
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.systems.follows = "systems";
+    };
+
     assets = {
       url = "github:Se7enseads/assets";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,8 +38,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland.url = "github:hyprwm/Hyprland";
-
     hyprpanel = {
       url = "github:Jas-SinghFSU/HyprPanel";
       inputs = { nixpkgs.follows = "nixpkgs"; };
@@ -43,7 +48,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, home-manager, nixpkgs, systems, ... }@inputs:
+  outputs = { self, agenix, home-manager, nixpkgs, systems, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -67,7 +72,11 @@
       nixosConfigurations = {
         okashi = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/okashi inputs.disko.nixosModules.disko ];
+          modules = [
+            ./hosts/okashi
+            inputs.disko.nixosModules.disko
+            agenix.nixosModules.default
+          ];
         };
       };
 
