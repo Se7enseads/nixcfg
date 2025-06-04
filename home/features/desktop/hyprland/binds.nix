@@ -83,8 +83,8 @@ in {
 
     bindle = let brightness = getExe pkgs.brightnessctl;
     in [
-      ", XF86AudioLowerVolume, exec, ${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
-      ", XF86AudioRaiseVolume, exec, ${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
+      ", XF86AudioLowerVolume, exec, ${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
+      ", XF86AudioRaiseVolume, exec, ${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
 
       "SHIFT,XF86AudioRaiseVolume, exec, ${pactl} set-source-volume @DEFAULT_SOURCE@ +5%"
       "SHIFT,XF86AudioLowerVolume, exec, ${pactl} set-source-volume @DEFAULT_SOURCE@ -5%"
