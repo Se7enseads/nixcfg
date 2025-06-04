@@ -60,6 +60,7 @@
           inherit system;
           config.allowUnfree = true;
         });
+      username = "castella";
     in {
       inherit lib;
 
@@ -71,7 +72,7 @@
 
       nixosConfigurations = {
         okashi = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs username; };
           modules = [
             ./hosts/okashi
             inputs.disko.nixosModules.disko
@@ -81,10 +82,10 @@
       };
 
       homeConfigurations = {
-        "castella@okashi" = home-manager.lib.homeManagerConfiguration {
+        "${username}@okashi" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/castella/okashi.nix ];
+          extraSpecialArgs = { inherit inputs outputs username; };
+          modules = [ ./home/${username}/okashi.nix ];
         };
       };
     };

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, ... }:
 with lib;
 let
   lm = config.login-manager;
@@ -10,7 +10,7 @@ in {
       session = {
         command =
           "${tuigreet} -g 'Welcome to ${config.networking.hostName}!' --remember --remember-session --time --time-format '%I:%M %p | %a • %h | %F' --cmd 'uwsm start hyprland-uwsm.desktop'";
-        user = "castella"; # TODO: Make this dynamic based on user
+        user = "${username}"; # TODO: Make this dynamic based on user
       };
 
     in {

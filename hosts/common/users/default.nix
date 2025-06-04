@@ -1,1 +1,1 @@
-{ imports = [ ./castella.nix ]; }
+{ username, ... }: { imports = [ ./${username}.nix ]; }

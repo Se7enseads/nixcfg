@@ -1,5 +1,5 @@
-{ config, inputs, pkgs, ... }: {
-  users.users.castella = {
+{ config, inputs, pkgs, username, ... }: {
+  users.users.${username} = {
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -19,6 +19,6 @@
     packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
   };
 
-  home-manager.users.castella =
-    import ../../../home/castella/${config.networking.hostName}.nix;
+  home-manager.users.${username} =
+    import ../../../home/${username}/${config.networking.hostName}.nix;
 }

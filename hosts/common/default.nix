@@ -1,5 +1,5 @@
 # Common configuration for all hosts
-{ lib, inputs, outputs, pkgs, ... }: {
+{ lib, inputs, outputs, pkgs, username, ... }: {
 
   imports = [ inputs.home-manager.nixosModules.home-manager ./users ];
 
@@ -23,7 +23,7 @@
     settings = {
       experimental-features = "flakes nix-command";
       trusted-users = [
-        "castella"
+        "${username}"
         "root"
       ]; # Set users that are allowed to use the flake command
 
