@@ -6,7 +6,6 @@
 with lib;
 let
   pactl = getExe' pkgs.pulseaudio "pactl";
-  prefix = "uwsm app --"; # uwsm
 
   workspaces = builtins.concatLists (builtins.genList (i:
     let ws = i + 1;
@@ -32,50 +31,49 @@ in {
           ++ optional hyprland.hyprpanel.enable
           "SUPERSHIFT, B, exec, hyprpanel -q; hyprpanel";
 
-        locks = optional hyprland.hyprlock.enable
-          "SUPER, L, exec, ${prefix} hyprlock";
+        locks = optional hyprland.hyprlock.enable "SUPER, L, exec, hyprlock";
 
         defaultApp = type:
           "${getExe pkgs.handlr-regex} launch ${escapeShellArg type}";
 
       in [
         # Modifiers: SUPER + KEY
-        "SUPER, A, exec, ${prefix} rofi -show drun" # TODO: modularize for rofi
-        "SUPER, E, exec, ${prefix} ${defaultApp "inode/directory"}"
-        "SUPER, F, exec, ${prefix} ${defaultApp "x-schema-handler/https"}"
-        "SUPER, I, exec, if hyprctl clients | grep title: config; then notify-send 'Already Open'; else ${prefix} code $DOTFILES; fi" # FIXME: set $DOTFILES
+        "SUPER, A, exec, rofi -show drun" # TODO: modularize for rofi
+        "SUPER, E, exec, ${defaultApp "inode/directory"}"
+        "SUPER, F, exec, ${defaultApp "x-schema-handler/https"}"
+        "SUPER, I, exec, if hyprctl clients | grep title: config; then notify-send 'Already Open'; else code $DOTFILES; fi" # FIXME: set $DOTFILES
         "SUPER, J, togglesplit"
         "SUPER, M, exec, uwsm stop"
         "SUPER, P, pseudo"
         "SUPER, Q, killactive"
-        "SUPER, S, exec, if hyprctl clients | grep spotify; then echo; else ${prefix} spotify; fi" # TODO: make spotify options
+        "SUPER, S, exec, if hyprctl clients | grep spotify; then echo; else spotify; fi" # TODO: make spotify options
         "SUPER, S, togglespecialworkspace, spotify"
-        "SUPER, T, exec, ${prefix} $TERM" # FIXME: fix terminal
+        "SUPER, T, exec, $TERM" # FIXME: fix terminal
         "SUPER, V, exec, cliphist list | rofi -dmenu -p 'Clipboard' | cliphist decode | wl-copy" # TODO: modularize for rofi
         "SUPER, W, togglefloating" # FIXME: fix floating windows
 
         # Modifiers: SUPER + ALT + KEY
-        "SUPER ALT, S, exec, ${prefix} wl-ocr" # on screen text recognition/copy # TODO: get wl-ocr working
+        "SUPER ALT, S, exec, wl-ocr" # on screen text recognition/copy # TODO: get wl-ocr working
 
         # Modifiers: SUPER + CTRL + KEY
-        "SUPER CTRL, S, exec, ${prefix} hyprshot -m output" # Screenshot Screen
+        "SUPER CTRL, S, exec, hyprshot -m output" # Screenshot Screen
 
         # Modifiers: SUPER + SHIFT + KEY
-        "SUPERSHIFT, W, exec, ${prefix} waypaper"
+        "SUPERSHIFT, W, exec, waypaper"
         "SUPERSHIFT, F, fullscreen"
 
         # Modifiers: CTRL + ALT + KEY
-        "CTRL ALT, S, exec, ${prefix} hyprshot -m region" # Screenshot Region
+        "CTRL ALT, S, exec, hyprshot -m region" # Screenshot Region
 
         # Modifiers: CTRL + SHIFT + KEY
-        "CTRL SHIFT, S, exec, ${prefix} hyprshot -m window" # Screenshot Window
+        "CTRL SHIFT, S, exec, hyprshot -m window" # Screenshot Window
 
         "SUPER, left, movefocus, l"
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
 
-        ", XF86Calculator, exec, ${prefix} qalculate-gtk" # TODO: get qalculate working
+        ", XF86Calculator, exec, qalculate-gtk" # TODO: get qalculate working
       ] ++ workspaces ++ bars ++ locks;
 
     bindl = [
