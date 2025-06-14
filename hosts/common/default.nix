@@ -6,6 +6,7 @@
     ./boot.nix
     ./networking.nix
     ./programs.nix
+    ./security.nix
     ./users
   ];
 
