@@ -1,7 +1,13 @@
 # Common configuration for all hosts
 { lib, inputs, outputs, pkgs, username, ... }: {
 
-  imports = [ inputs.home-manager.nixosModules.home-manager ./users ];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    ./boot.nix
+    ./networking.nix
+    ./programs.nix
+    ./users
+  ];
 
   home-manager = {
     backupFileExtension = "bak.hm";
