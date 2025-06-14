@@ -15,23 +15,14 @@
   };
 
   nixpkgs = {
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-
-    # You can add overlays here
+    config = { allowUnfree = true; };
     overlays = builtins.attrValues outputs.overlays;
   };
 
   nix = {
     settings = {
       experimental-features = "flakes nix-command";
-      trusted-users = [
-        "${username}"
-        "root"
-      ]; # Set users that are allowed to use the flake command
+      trusted-users = [ "${username}" "root" ];
 
       substituters = [
         "https://nix-community.cachix.org"
@@ -51,7 +42,6 @@
     registry = (lib.mapAttrs (_: flake: { inherit flake; }))
       ((lib.filterAttrs (_: lib.isType "flake")) inputs);
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
   };
 
   users.defaultUserShell = pkgs.fish;
